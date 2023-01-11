@@ -1,5 +1,4 @@
-export interface IItem {
-    id: string,
-    title: string
-    salary: number | ""
-}
+export interface ITodo {
+    title: string;
+    salary: number | "";
+  }

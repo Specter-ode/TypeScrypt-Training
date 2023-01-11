@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import AddTodo from "./components/AddTodo/AddTodo";
 import TodoList from "./components/TodoList/TodoList";
 import s from "./App.module.css";
-import { IItem } from "./types/todo";
+import { ITodo } from "./types/todo";
 
 const data = [
   {
@@ -22,17 +22,15 @@ const data = [
   },
 ];
 
-interface ITodo {
-  title: string
-  salary: number | ""
+export interface IItem extends ITodo {
+  id: string;
 }
-
 
 const App: React.FC = () => {
   const [todos, setTodos] = useState<IItem[]>(data);
-  console.log('APP todos: ', todos);
-  
-  const addTodoHandler = (todo: ITodo) => {
+  console.log("APP todos: ", todos);
+
+  const addTodoHandler = (todo: ITodo): void => {
     setTodos((prevState) => {
       return [
         ...prevState,
@@ -44,15 +42,15 @@ const App: React.FC = () => {
       ];
     });
   };
-  const onRemoveTodo = (id: string) => {
+  const onRemoveTodo = (id: string): void => {
     setTodos((prevState) => {
-      return prevState.filter(item => item.id !==id)
+      return prevState.filter((item) => item.id !== id);
     });
   };
   return (
     <div className={s.App}>
       <TodoList todos={todos} onRemoveTodo={onRemoveTodo} />
-      <AddTodo onAddTodo={addTodoHandler}/>
+      <AddTodo onAddTodo={addTodoHandler} />
     </div>
   );
 };
